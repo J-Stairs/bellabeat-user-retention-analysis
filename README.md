@@ -21,8 +21,8 @@ By shifting the lens from rigid medical benchmarks to user psychology and retent
 - **Sample Size & Scope:** The dataset spans a 30-day window and consists of distinct logs for 33 eligible tracker users (24 users present in the sleep logs).
 - **Vetted Baselines:** To ground individual trends in clinical reality, behavioral patterns were benchmarked against global health metrics established by the **CDC/WHO** (for daily step counts) and the **NHANES (National Health and Nutrition Examination Survey)** historical data (for a 7-hour baseline female sleep average).
 - **Data Limitations & Bias Log:**
-	1. **Sample Size Constraints:** A cohort of 33 users is far too small to establish statistically significant global population averages without a high margin of error.
-	2. **Demographic Blindspots:** The dataset is entirely anonymous and completely lacks demographic metadata such as gender, age, or geographic location. Because Bellabeat specifically engineers health and            wellness products tailored for women, analyzing a generic, gender-blind cohort introduces potential sample bias.
+	1.**Sample Size Constraints:** A cohort of 33 users is far too small to establish statistically significant global population averages without a high margin of error.
+	2.**Demographic Blindspots:** The dataset is entirely anonymous and completely lacks demographic metadata such as gender, age, or geographic location. Because Bellabeat specifically engineers health and            wellness products tailored for women, analyzing a generic, gender-blind cohort introduces potential sample bias.
 	3.**Data Volatility Outliers:** While auditing individual files, I identified severe data constraints, such as User 1844505072, who logged a massive sleep average of 10.87 hours, but only across 3 logged days. This high volatility reinforces that short-term tracking spans cannot be relied upon to project sustainable user lifestyle trends.
 
 ---
