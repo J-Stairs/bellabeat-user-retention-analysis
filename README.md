@@ -40,26 +40,14 @@ The cloud parser was rejecting the file layout due to chaotic trailing floating-
 ### Advanced Cohort Retention & Compliance Query
 To uncover the retention data layer, I wrote a cross-table analysis script. This script handles cross-table typecasting mismatches (INT64 vs STRING user IDs) that would otherwise break a standard JOIN, flags passive device abandonment via logical condition filtering, and segments the cohort by retention risk indicators:
 
-/*
-===============================================================================
-This query calculates device compliance and tracking habits across a 30-day window.
-It aims to pinpoint exactly when and where users abandon their trackers,
-differentiating between active use, passive abandonment (leaving the device
-on a surface), and a complete drop-off in data logging.
 
-
-CHANGELOG:
-  - Standardized user IDs to STRING to resolve cross-table JOIN type mismatches.
-===============================================================================
-*/
-
-
+'''
 WITH activity_summary AS (
   SELECT
     CAST(Id AS STRING) AS fitbit_user_id, -- Standardized to STRING
     -- Count how many unique days this user actually logged data
     COUNT(DISTINCT ActivityDate) AS total_days_activity_logged,
-   
+    
     -- Track 'Passive Abandonment': Count days where the device was turned on
     -- but recorded exactly 0 steps and nearly 24 hours of sedentary time
     COUNT(CASE
@@ -67,7 +55,7 @@ WITH activity_summary AS (
              AND CAST(SedentaryMinutes AS FLOAT64) >= 1380 -- 1380 mins = 23 hours
             THEN 1
           END) AS passive_abandonment_days,
-         
+          
     -- Calculate their average steps strictly on the days they actually wore it
     ROUND(AVG(CASE WHEN CAST(TotalSteps AS INT64) > 0 THEN CAST(TotalSteps AS INT64) END), 0) AS avg_steps_on_active_days
   FROM
@@ -75,7 +63,6 @@ WITH activity_summary AS (
   GROUP BY
     Id
 ),
-
 
 sleep_summary AS (
   SELECT
@@ -88,23 +75,21 @@ sleep_summary AS (
     Id
 )
 
-
 -- Combine activity tracking and sleep tracking behavior side-by-side
 SELECT
   act.fitbit_user_id,
   act.total_days_activity_logged,
- 
+  
   -- If a user never logged sleep, replace the null value with 0 to keep data clean
   COALESCE(slp.total_days_sleep_logged, 0) AS total_days_sleep_logged,
   act.passive_abandonment_days,
   act.avg_steps_on_active_days,
- 
+  
   -- Logical Flag: Highlight users who dropped off before the full 30 days ended
   CASE
     WHEN act.total_days_activity_logged < 25 THEN 'High Churn Risk (<25 Days Logged)'
     ELSE 'Consistent Logger'
   END AS user_retention_segment
-
 
 FROM
   activity_summary AS act
@@ -113,9 +98,7 @@ LEFT JOIN
   ON act.fitbit_user_id = slp.fitbit_user_id
 ORDER BY
   total_days_activity_logged ASC,
-  total_days_sleep_logged ASC;
-
---
+  total_days_sleep_logged ASC;'''
 
 ### The Core Mystery: Tracking The Ghosts in the Data
 
