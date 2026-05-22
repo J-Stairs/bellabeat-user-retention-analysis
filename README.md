@@ -41,8 +41,9 @@ The cloud parser was rejecting the file layout due to chaotic trailing floating-
 To uncover the retention data layer, I wrote a cross-table analysis script. This script handles cross-table typecasting mismatches (INT64 vs STRING user IDs) that would otherwise break a standard JOIN, flags passive device abandonment via logical condition filtering, and segments the cohort by retention risk indicators:
 
 
-'''
-WITH activity_summary AS (
+
+
+’’’WITH activity_summary AS (
   SELECT
     CAST(Id AS STRING) AS fitbit_user_id, -- Standardized to STRING
     -- Count how many unique days this user actually logged data
@@ -98,7 +99,9 @@ LEFT JOIN
   ON act.fitbit_user_id = slp.fitbit_user_id
 ORDER BY
   total_days_activity_logged ASC,
-  total_days_sleep_logged ASC;'''
+  total_days_sleep_logged ASC;’’’
+
+
 
 ### The Core Mystery: Tracking The Ghosts in the Data
 
