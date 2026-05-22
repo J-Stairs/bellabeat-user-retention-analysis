@@ -1,5 +1,7 @@
 ## Case Study: Beyond the Averages — Analyzing User Churn & Device Abandonment in Smart Wearables
+
 **Author:** Jennifer Stairs
+
 **Core Stack:** Google BigQuery (SQL) | Google Sheets | Tableau Public
 
 --
@@ -137,7 +139,7 @@ The metrics were mapped side-by-side using Tableau, applying Bellabeat's signatu
 
 --
 
-###Transforming Churn into Product Strategy
+### Transforming Churn into Product Strategy
 To patch this leaky customer funnel and transform early tracker usage into long-term lifestyle habits, I developed three concrete feature recommendations tailored for Bellabeat's ecosystem:
 
 1. **The "First-Week Wins" Gamification Engine:** Shift focus away from intimidating, rigid performance targets (like the standard 10,000-step baseline) during the initial onboarding sequence. Implement a "Habit Streak" rewards system based strictly on device compliance ("Wore the tracker 5 days in a row!") to lower psychological friction and solidify early adoption routines.
