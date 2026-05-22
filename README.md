@@ -1,7 +1,5 @@
 ## Case Study: Beyond the Averages — Analyzing User Churn & Device Abandonment in Smart Wearables
-
 **Author:** Jennifer Stairs
-
 **Core Stack:** Google BigQuery (SQL) | Google Sheets | Tableau Public
 
 --
